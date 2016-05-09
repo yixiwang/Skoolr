@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  many_or_all_responses: 1
+  at_no_time_responses: 1
+  few_times_responses: 1
+  some_times_responses: 1
+  school_id: 
+
+two:
+  many_or_all_responses: 1
+  at_no_time_responses: 1
+  few_times_responses: 1
+  some_times_responses: 1
+  school_id: 

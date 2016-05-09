@@ -1,0 +1,46 @@
+<div class="scroll-table" style="height:72vh;">
+<h2> <%= @school.name %> </h2>
+
+  <% if current_user %>
+      <% if current_user.favorites.include?(@school) %>
+          <%= link_to "unfavorite", favorite_school_path(@school, type: "unfavorite"), method: :put, class: "btn btn-primary" %><br>
+      <% else %>
+          <%= link_to "favorite",   favorite_school_path(@school, type: "favorite"), method: :put , class: "btn btn-primary" %><br>
+      <% end %>
+  <% end %>
+
+<%= pluralize(@school.ratings.size, "user") %> 
+rated this school
+<% if @school.ratings.average(:value) != nil %>
+	<%= @school.ratings.average(:value) %>/5.0
+<% end %><br/>
+<% if user_signed_in? && !admin_signed_in?%>
+	<%= render "ratings/form" %>
+<% else %>
+	<br/>
+<% end %>
+
+<strong>Address:</strong> <br/> <%= @school.address %> <br/>
+<br/><strong>Grades:</strong> <br/> 
+<% @school.grades.each do |grade| %>
+	<span class="graph" style="padding: 0 0 0 <%= grade.average_mark %>px"> <%= grade.average_mark %> </span> <%= grade.subject %> <br/>
+<% end %>
+<% if @survey != nil %>
+<br/><strong>Surveys:</strong> <br/> 
+<table id="surveyTable">
+<tr>
+<th>Total responses</th><th>Very satisfied</th><th>Somewhat satisfied</th><th>Neither satisifed nor dissatisfied</th><th>Dissatisfied</th>
+</tr>
+	<tr>
+		<td><%= @survey.many_or_all_responses + @survey.at_no_time_responses + @survey.few_times_responses + @survey.some_times_responses%></td> <td><%= @survey.many_or_all_responses %></td> <td><%= @survey.some_times_responses %></td> <td><%= @survey.few_times_responses %></td> <td><%= @survey.at_no_time_responses %></td>
+	</tr>
+</table> 
+<% end %>
+<script>generateMap('<%= @school.address %>')</script>
+<div id="googleMap"></div>
+
+<div>
+<a class="twitter-timeline" href="https://twitter.com/VSB39" data-widget-id="669735318787002368">Tweets by @VSB39</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+</div>

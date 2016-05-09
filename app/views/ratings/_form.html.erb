@@ -1,0 +1,13 @@
+<%= form_for([@school, @school.ratings.build]) do |f| %>
+  <p>
+    <%= f.hidden_field :user, :value => current_user.id %>
+  </p>
+  <p>
+	<%= f.radio_button :value, 1, :checked => true %>
+	<%= f.radio_button :value, 2 %>
+	<%= f.radio_button :value, 3 %>
+	<%= f.radio_button :value, 4 %>
+	<%= f.radio_button :value, 5 %>
+    <%= f.submit "Rate" %>
+  </p>
+<% end %>

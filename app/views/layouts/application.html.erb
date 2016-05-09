@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Skoolr</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCrfeBdamRgSevE5UuhMaiRffR1ZSLIIB8&callback=initMap"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body ng-app="skoolr" class="container-fluid">
+
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=508633599295306";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<h1>Skoolr</h1>
+<span>
+	<span class="boxed font-24 col-md-2 text-center"><%= link_to "Home", '/home' %> </span>
+	<span class="boxed font-24 col-md-2 text-center"><%= link_to "Get Started", '/search' %> </span>
+	<span class="boxed font-24 col-md-2 text-center"><%= link_to "Browse Schools", '/browse' %> </span>
+  <span class="boxed font-24 col-md-2 text-center"><%= link_to "Contact Us", '/socialmedia' %> </span>
+  <% if user_signed_in? && !admin_signed_in? %>
+      <span class="boxed font-24 col-md-2 text-center"><%= link_to "Profile", '/profile' %></span>
+        <span class="boxed font-24 col-md-2 text-center">
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
+        </span>
+
+  <% elsif !user_signed_in? && admin_signed_in? %>
+      <span class="boxed font-24 col-md-2 text-center"><%= link_to "Admin", '/admin' %></span>
+      <span class="boxed font-24 col-md-2 text-center">
+          <%= link_to "Logout", destroy_admin_session_path, :method => :delete %>
+        </span>
+        <% elsif !user_signed_in? && !admin_signed_in? %>
+      <span class="boxed font-24 col-md-2 text-center"><%= link_to "Sign in", '/login' %> </span>
+  <% end %>
+</span>
+<br/><br/>
+
+<div class="boxed col-md-12">
+  <%= yield %>
+</div>
+
+</body>
+<div class="fb-like" data-href="https://www.facebook.com/cpsc310skoolr" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>

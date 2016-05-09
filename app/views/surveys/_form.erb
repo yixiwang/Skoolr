@@ -1,0 +1,34 @@
+<%= form_for @school.survey, method: :patch do |f| %>
+  <% if @survey && @survey.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@survey.errors.count, "error") %> prohibited
+        this survey from being saved:
+	  </h2>
+      <ul>
+        <% @survey.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+	</div>
+  <% end %>
+  <p>
+    <%= f.label :Very_satisfied %><br>
+    <%= f.number_field :many_or_all_responses %>
+  </p>
+  <p>
+    <%= f.label :Somewhat_satisfied %><br>
+    <%= f.number_field :some_times_responses %>
+  </p>
+  <p>
+    <%= f.label :Neither_satisfied_nor_dissatisfied %><br>
+    <%= f.number_field :few_times_responses %>
+  </p>
+  <p>
+    <%= f.label :Dissatisfied %><br>
+    <%= f.number_field :at_no_time_responses %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

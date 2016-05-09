@@ -1,0 +1,42 @@
+<p>
+  <strong><%= @school.name %></strong>
+</p>
+<p>
+  <%= @school.address %>
+</p>
+<h2>Grades</h2>
+<% @school.grades.each do |grade| %>
+  <p>
+    <strong>Subject</strong>
+    <%= grade.subject %>
+  </p>
+  <p>
+    <strong>Average mark</strong>
+    <%= grade.average_mark %>
+  </p>
+  
+  <p>
+    <%= link_to 'Destroy Grade', [grade.school, grade],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+<% if @survey != nil %>
+<h2>Surveys</h2>
+  <p>
+    <strong>Very satisfied</strong>
+    <%= @survey.many_or_all_responses %>
+  </p>
+  <p>
+    <strong>Somewhat satisfied</strong>
+    <%= @survey.some_times_responses %>
+  </p>
+  <p>
+    <strong>Neither satisifed nor dissatisfied</strong>
+    <%= @survey.few_times_responses %>
+  </p>
+  <p>
+    <strong>Dissatisfied</strong>
+    <%= @survey.at_no_time_responses %>
+  </p>
+<% end %>

@@ -1,0 +1,12 @@
+<h1>Edit school</h1>
+
+<%= render 'schools/form' %>
+
+<h2>Add grade:</h2>
+
+<%= render 'grades/form' %>
+
+<% if @school.survey != nil %>
+<h2>Edit survey:</h2>
+<%= render 'surveys/form' %>
+<% end %>

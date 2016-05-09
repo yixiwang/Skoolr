@@ -1,0 +1,44 @@
+<div ng-controller="BrowseCtrl">
+	<!--
+	<div class="height-80vh boxed col-md-6">
+		<form><input class="font-24 width-100p" ng-change="schoolSearch()" ng-model="searchQuery" placeholder="Search"></input></form><br/>
+		<select class="font-24 width-100p" style="height:90%;" size="2">
+			<option ng-repeat="school in searchResults | orderBy: 'name'" ng-click="loadSchoolInfo(school.id)">
+				{{school.name}}
+			</option>
+		</select>
+	</div>
+	
+	<div class="height-80vh boxed col-md-6">
+		<span ng-show="schoolName">
+			<h2> {{schoolName}}</h2>
+			<strong>Address:</strong> <br/> {{schoolAddress}}<br/>
+			<br/><strong>Grades (subject, grade, average mark):</strong> <br/> 
+			<div ng-repeat="grade in schoolGrades">
+				<span class="graph" style="padding:0 0 0 {{grade.average_mark}}px;"> {{grade.average_mark}} </span> {{grade.subject}} {{grade.grade}}
+			</div>
+			<br/><strong>Surveys:</strong> <br/> 
+			<option ng-repeat="survey in schoolSurveys">
+				{{survey.question}}, {{survey.non_excluded_responses}}, {{survey.many_or_all_responses}}, {{survey.at_no_time_responses}}, {{survey.few_times_responses}}, {{survey.some_times_responses}}
+			</option>
+			<div id="googleMap"></div>
+		</span>
+	</div>
+	-->
+	<div class="height-80vh boxed col-md-6">
+			<%= form_tag(browse_index_path, :method => "get") do %>
+				<%= text_field_tag :search, params[:search], placeholder: "Search", class: "font-24 width-100p" %>
+			<% end %>
+		<div class="scroll-table" style="height:72vh;">
+			<% @schools.sort_by {|h| h[:name]}.each do |school| %>
+				<%= link_to school.name, browse_path(school, :search => params[:search]), class: "font-24 width-100p btn btn-default", style: "text-align:left;" %>
+			<% end %>
+		</div>
+	</div>
+	
+	<div class="height-80vh boxed col-md-6">
+		<% if !current_page?(:controller => "browse") %>
+			<%= render partial: "show" %>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  average_mark: 1
+  school_id: 
+
+two:
+  subject: MyString
+  average_mark: 1
+  school_id: 

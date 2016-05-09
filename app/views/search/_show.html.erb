@@ -1,0 +1,20 @@
+<h2> <%= @school.name %> </h2>
+<strong>Address:</strong> <br/> <%= @school.address %> <br/>
+<br/><strong>Grades:</strong> <br/> 
+<% @school.grades.each do |grade| %>
+	<span class="graph" style="padding: 0 0 0 <%= grade.average_mark %>px"> <%= grade.average_mark %> </span> <%= grade.subject %> <br/>
+<% end %>
+<br/><strong>Surveys:</strong> <br/>
+<% if @school.survey != nil %>
+<table id="surveyTable">
+<tr>
+<th>Total responses</th><th>Very satisfied</th><th>Somewhat satisfied</th><th>Neither satisifed nor dissatisfied</th><th>Dissatisfied</th>
+</tr>
+	<tr>
+		<td><%= @school.survey.many_or_all_responses + @school.survey.at_no_time_responses + @school.survey.few_times_responses + @school.survey.some_times_responses%></td> <td><%= @school.survey.many_or_all_responses %></td> <td><%= @school.survey.some_times_responses %></td> <td><%= @school.survey.few_times_responses %></td> <td><%= @school.survey.at_no_time_responses %></td>
+	</tr>
+</table> 
+<% end %>
+<%= @school.distance_to(params[:search]) %><br/>
+<script>generateMapWithPath('<%= @school.address %>')</script>
+<div id="googleMap"></div>
